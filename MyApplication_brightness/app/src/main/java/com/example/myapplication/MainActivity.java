@@ -10,6 +10,10 @@ import android.provider.Settings;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+
 import java.util.List;
 
 import static android.provider.Settings.System.getInt;
@@ -30,9 +34,9 @@ public class MainActivity extends Activity implements SensorEventListener {
         // textview
 //        TextView textView = findViewById(R.id.textView);
 //        TextView textView2 = findViewById(R.id.textView2);
-        textView = findViewById(R.id.textView);
-        textView2 = findViewById(R.id.textView2);
-        textView3 = findViewById(R.id.textView3);
+        textView = findViewById(R.id.textView);           // WORKAROUND Comment out
+        textView2 = findViewById(R.id.textView2);         // WORKAROUND Comment out
+        textView3 = findViewById(R.id.textView3);         // WORKAROUND Comment out
 
         manager = (SensorManager)getSystemService(SENSOR_SERVICE);
 
@@ -51,6 +55,23 @@ public class MainActivity extends Activity implements SensorEventListener {
         String text1 = "start brightness : " + String.valueOf(value) + "(system : " + String.valueOf(sValue) + ")";
         textView.setText(text1);
 
+        // 遷移ボタン配置
+        Button sendButton1 = findViewById(R.id.send_button1);
+        sendButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), GotoHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button sendButton2 = findViewById(R.id.send_button2);
+        sendButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), SOSActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
