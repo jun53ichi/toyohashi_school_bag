@@ -57,23 +57,6 @@ public class MainActivity extends Activity implements SensorEventListener {
         String text1 = "start brightness : " + String.valueOf(value) + "(system : " + String.valueOf(sValue) + ")";
         textView.setText(text1);
 
-        // 遷移ボタン配置
-        Button sendButton1 = findViewById(R.id.send_button1);
-        sendButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), GotoHomeActivity.class);
-                startActivity(intent);
-            }
-        });
-        Button sendButton2 = findViewById(R.id.send_button2);
-        sendButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), SOSActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -149,24 +132,25 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
     }
 
+    // 画面遷移のためのキーイベント処理
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
         Log.v("KeyDown", "KeyCode=" + keyCode);
         return super.onKeyDown(keyCode, event);
     }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        // TODO Auto-generated method stub
-        String action="";
-
-        switch(event.getAction()) {
-            case KeyEvent.KEYCODE_VOLUME_UP:
-                action = "Key Vol Up";
-                break;
+        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP)) {
+            Intent intent = new Intent(getApplication(), GotoHomeActivity.class);
+            startActivity(intent);
         }
-        Log.v("KeyEvent", action + ": KeyCode=" + event.getKeyCode());
+        else if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN)) {
+            Intent intent = new Intent(getApplication(), SOSActivity.class);
+            startActivity(intent);
+        }
         return super.dispatchKeyEvent(event);
     }
 
