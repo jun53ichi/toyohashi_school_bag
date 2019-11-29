@@ -68,18 +68,18 @@ public class MainActivity extends Activity implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
 
         // TODO Auto-genarated method stub
-        String str = "";
-        float sensorValue = 0.0f;
         if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
+            float sensorValue;
             sensorValue = event.values[0];
             if (DEBUG) {
                 // 照度値を表示.
+                String str;
                 str = "照度:" + event.values[0];
                 textView2.setText(str);
             }
 
             // 照度値よって明るさ値設定.
-            float brightness = 0.1f;
+            float brightness;
             if(sensorValue < 100.0){
                 // 町の街灯下：100.
                 // これ以下を「暗い状況」とする.

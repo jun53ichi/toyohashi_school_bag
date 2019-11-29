@@ -18,6 +18,7 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.Transport;
 import javax.mail.MessagingException;
 import java.util.Properties;
+import java.util.Calendar;
 
 public class SOSActivity extends AppCompatActivity {
 
@@ -32,9 +33,16 @@ public class SOSActivity extends AppCompatActivity {
         lp.screenBrightness = 1.0f;
         getWindow().setAttributes(lp);
 
+        // 時刻取得.
+        Calendar calendar = Calendar.getInstance();
+        // 時間(24時間単位).
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        // 分.
+        int min = calendar.get(Calendar.MINUTE);
+
         // メール送信処理
         String subject = "[SOS] ゆうたくん　大ピンチ！！";
-        String maintext = "xx時xx分 ゆうたくんから断続的に激しい衝撃を検知しました。";
+        String maintext = hour + "時" + min + "分 ゆうたくんから断続的に激しい衝撃を検知しました。";
         String from_addr = "schoolbag.is.money@gmail.com";
         String from_pw = "money1459toyohashischoolbag6459";
         String to_addr = "schoolbag.is.money@gmail.com";
