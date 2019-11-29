@@ -19,7 +19,8 @@ public class GotoHomeActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Log.v("KeyDown", "KeyCode=" + keyCode);
-        return super.onKeyDown(keyCode, event);
+//        return super.onKeyDown(keyCode, event);
+        return true;
     }
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
@@ -28,6 +29,7 @@ public class GotoHomeActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplication(), MainActivity.class);
             startActivity(intent);
         }
-        return super.dispatchKeyEvent(event);
+//        return super.dispatchKeyEvent(event);
+        return true;
     }
 }

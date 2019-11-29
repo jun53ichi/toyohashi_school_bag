@@ -134,7 +134,8 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Log.v("KeyDown", "KeyCode=" + keyCode);
-        return super.onKeyDown(keyCode, event);
+       // return super.onKeyDown(keyCode, event);
+        return true;
     }
 
     @Override
@@ -149,7 +150,8 @@ public class MainActivity extends Activity implements SensorEventListener {
             Intent intent = new Intent(getApplication(), SOSActivity.class);
             startActivity(intent);
         }
-        return super.dispatchKeyEvent(event);
+//        return super.dispatchKeyEvent(event);
+        return true;
     }
 
 /*  ボタン処理.
