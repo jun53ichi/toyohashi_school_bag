@@ -22,39 +22,21 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private SensorManager manager;
 
+    private static final boolean DEBUG = false;
     TextView textView;
     TextView textView2;
-    TextView textView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // textview
-//        TextView textView = findViewById(R.id.textView);
-//        TextView textView2 = findViewById(R.id.textView2);
-        textView = findViewById(R.id.textView);           // WORKAROUND Comment out
-        textView2 = findViewById(R.id.textView2);         // WORKAROUND Comment out
-        textView3 = findViewById(R.id.textView3);         // WORKAROUND Comment out
-
-        manager = (SensorManager)getSystemService(SENSOR_SERVICE);
-
-        // Windowの明るさ取得.
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        float value = lp.screenBrightness;
-        // systemの明るさを取得.
-        int sValue = 0;
-        try {
-            sValue = getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-        } catch (Settings.SettingNotFoundException e) {
-            e.printStackTrace();
+        if (DEBUG) {
+            // textview
+            textView = findViewById(R.id.textView);           // WORKAROUND Comment out
+            textView2 = findViewById(R.id.textView2);         // WORKAROUND Comment out
         }
-
-        // 変更前の輝度表示.
-        String text1 = "start brightness : " + String.valueOf(value) + "(system : " + String.valueOf(sValue) + ")";
-        textView.setText(text1);
-
+        manager = (SensorManager)getSystemService(SENSOR_SERVICE);
     }
 
     @Override
@@ -90,8 +72,11 @@ public class MainActivity extends Activity implements SensorEventListener {
         float sensorValue = 0.0f;
         if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
             sensorValue = event.values[0];
-            str = "照度:" + event.values[0];
-            textView3.setText(str);
+            if (DEBUG) {
+                // 照度値を表示.
+                str = "照度:" + event.values[0];
+                textView2.setText(str);
+            }
 
             // 照度値よって明るさ値設定.
             float brightness = 0.1f;
@@ -113,20 +98,21 @@ public class MainActivity extends Activity implements SensorEventListener {
             lp.screenBrightness = brightness;
             getWindow().setAttributes(lp);
 
-            // 変更後の輝度表示.
-            // Windowの明るさ取得.
-            float value = lp.screenBrightness;
-            // systemの明るさを取得.
-            int sValue = 0;
-            try {
-                sValue = getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-            } catch (Settings.SettingNotFoundException e) {
-                e.printStackTrace();
-            }
+            if (DEBUG) {
+                // Windowの明るさ取得.
+                float value = lp.screenBrightness;
+                // systemの明るさを取得.
+                int sValue = 0;
+                try {
+                    sValue = getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+                } catch (Settings.SettingNotFoundException e) {
+                    e.printStackTrace();
+                }
 
-            // 画面表示
-            String text2 = "new brightness : " + String.valueOf(value) + "(system : " + String.valueOf(sValue) + ")";
-            textView2.setText(text2);
+                // 変更後の輝度表示.
+                String text2 = "new brightness : " + String.valueOf(value) + "(system : " + String.valueOf(sValue) + ")";
+                textView.setText(text2);
+            }
         }
     }
 
