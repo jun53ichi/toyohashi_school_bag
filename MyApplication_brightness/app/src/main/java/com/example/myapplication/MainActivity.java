@@ -110,7 +110,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                 }
 
                 // 変更後の輝度表示.
-                String text2 = "new brightness : " + String.valueOf(value) + "(system : " + String.valueOf(sValue) + ")";
+                String text2 = "new brightness : " + value + "(system : " + sValue + ")";
                 textView.setText(text2);
             }
         }
