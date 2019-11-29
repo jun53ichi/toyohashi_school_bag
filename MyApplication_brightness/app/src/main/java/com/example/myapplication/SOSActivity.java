@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -24,6 +25,12 @@ public class SOSActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sos);
+
+        // Windowの明るさ設定.
+        // SOS中は目立つように輝度をMAXにする.
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.screenBrightness = 1.0f;
+        getWindow().setAttributes(lp);
 
         // メール送信処理
         String subject = "[SOS] ゆうたくん　大ピンチ！！";
