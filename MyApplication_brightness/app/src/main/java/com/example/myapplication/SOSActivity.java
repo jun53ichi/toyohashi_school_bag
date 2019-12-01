@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -17,6 +18,7 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.Transport;
 import javax.mail.MessagingException;
 import java.util.Properties;
+import java.util.Calendar;
 
 public class SOSActivity extends AppCompatActivity {
 
@@ -25,9 +27,22 @@ public class SOSActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sos);
 
+        // Windowの明るさ設定.
+        // SOS中は目立つように輝度をMAXにする.
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.screenBrightness = 1.0f;
+        getWindow().setAttributes(lp);
+
+        // 時刻取得.
+        Calendar calendar = Calendar.getInstance();
+        // 時間(24時間単位).
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        // 分.
+        int min = calendar.get(Calendar.MINUTE);
+
         // メール送信処理
         String subject = "[SOS] ゆうたくん　大ピンチ！！";
-        String maintext = "xx時xx分 ゆうたくんから断続的に激しい衝撃を検知しました。";
+        String maintext = hour + "時" + min + "分 ゆうたくんから断続的に激しい衝撃を検知しました。";
         String from_addr = "schoolbag.is.money@gmail.com";
         String from_pw = "money1459toyohashischoolbag6459";
         String to_addr = "schoolbag.is.money@gmail.com";
@@ -40,7 +55,8 @@ public class SOSActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Log.v("KeyDown", "KeyCode=" + keyCode);
-        return super.onKeyDown(keyCode, event);
+//        return super.onKeyDown(keyCode, event);
+        return true;
     }
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
@@ -49,7 +65,8 @@ public class SOSActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplication(), MainActivity.class);
             startActivity(intent);
         }
-        return super.dispatchKeyEvent(event);
+//        return super.dispatchKeyEvent(event);
+        return true;
     }
 
     // メール送信処理

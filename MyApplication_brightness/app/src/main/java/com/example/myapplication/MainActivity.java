@@ -22,39 +22,21 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private SensorManager manager;
 
+    private static final boolean DEBUG = false;
     TextView textView;
     TextView textView2;
-    TextView textView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // textview
-//        TextView textView = findViewById(R.id.textView);
-//        TextView textView2 = findViewById(R.id.textView2);
-        textView = findViewById(R.id.textView);           // WORKAROUND Comment out
-        textView2 = findViewById(R.id.textView2);         // WORKAROUND Comment out
-        textView3 = findViewById(R.id.textView3);         // WORKAROUND Comment out
-
-        manager = (SensorManager)getSystemService(SENSOR_SERVICE);
-
-        // Windowの明るさ取得.
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        float value = lp.screenBrightness;
-        // systemの明るさを取得.
-        int sValue = 0;
-        try {
-            sValue = getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-        } catch (Settings.SettingNotFoundException e) {
-            e.printStackTrace();
+        if (DEBUG) {
+            // textview
+            textView = findViewById(R.id.textView);           // WORKAROUND Comment out
+            textView2 = findViewById(R.id.textView2);         // WORKAROUND Comment out
         }
-
-        // 変更前の輝度表示.
-        String text1 = "start brightness : " + String.valueOf(value) + "(system : " + String.valueOf(sValue) + ")";
-        textView.setText(text1);
-
+        manager = (SensorManager)getSystemService(SENSOR_SERVICE);
     }
 
     @Override
@@ -86,15 +68,18 @@ public class MainActivity extends Activity implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
 
         // TODO Auto-genarated method stub
-        String str = "";
-        float sensorValue = 0.0f;
         if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
+            float sensorValue;
             sensorValue = event.values[0];
-            str = "照度:" + event.values[0];
-            textView3.setText(str);
+            if (DEBUG) {
+                // 照度値を表示.
+                String str;
+                str = "照度:" + event.values[0];
+                textView2.setText(str);
+            }
 
             // 照度値よって明るさ値設定.
-            float brightness = 0.1f;
+            float brightness;
             if(sensorValue < 100.0){
                 // 町の街灯下：100.
                 // これ以下を「暗い状況」とする.
@@ -113,20 +98,21 @@ public class MainActivity extends Activity implements SensorEventListener {
             lp.screenBrightness = brightness;
             getWindow().setAttributes(lp);
 
-            // 変更後の輝度表示.
-            // Windowの明るさ取得.
-            float value = lp.screenBrightness;
-            // systemの明るさを取得.
-            int sValue = 0;
-            try {
-                sValue = getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-            } catch (Settings.SettingNotFoundException e) {
-                e.printStackTrace();
-            }
+            if (DEBUG) {
+                // Windowの明るさ取得.
+                float value = lp.screenBrightness;
+                // systemの明るさを取得.
+                int sValue = 0;
+                try {
+                    sValue = getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+                } catch (Settings.SettingNotFoundException e) {
+                    e.printStackTrace();
+                }
 
-            // 画面表示
-            String text2 = "new brightness : " + String.valueOf(value) + "(system : " + String.valueOf(sValue) + ")";
-            textView2.setText(text2);
+                // 変更後の輝度表示.
+                String text2 = "new brightness : " + value + "(system : " + sValue + ")";
+                textView.setText(text2);
+            }
         }
     }
 
@@ -134,7 +120,8 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Log.v("KeyDown", "KeyCode=" + keyCode);
-        return super.onKeyDown(keyCode, event);
+       // return super.onKeyDown(keyCode, event);
+        return true;
     }
 
     @Override
@@ -149,7 +136,8 @@ public class MainActivity extends Activity implements SensorEventListener {
             Intent intent = new Intent(getApplication(), SOSActivity.class);
             startActivity(intent);
         }
-        return super.dispatchKeyEvent(event);
+//        return super.dispatchKeyEvent(event);
+        return true;
     }
 
 /*  ボタン処理.
