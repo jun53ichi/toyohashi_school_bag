@@ -58,6 +58,17 @@ public class SOSActivity extends AppCompatActivity {
 //        return super.onKeyDown(keyCode, event);
         return true;
     }
+
+    @Override
+    public boolean onKeyUp( int keyCode, KeyEvent event ) {
+        Log.v("KeyUp", "KeyCode=" + keyCode);
+        if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP) {
+            Intent intent = new Intent(getApplication(), MainActivity.class);
+            startActivity(intent);
+        }
+        return true;
+    }
+/*
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
@@ -68,7 +79,7 @@ public class SOSActivity extends AppCompatActivity {
 //        return super.dispatchKeyEvent(event);
         return true;
     }
-
+*/
     // メール送信処理
     protected static void sendGmail(String subject,String mainText, String from_addr, String from_pw, String to_addr) {
 

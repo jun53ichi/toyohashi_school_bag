@@ -116,14 +116,34 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
     }
 
+    private boolean flag = false;
     // 画面遷移のためのキーイベント処理
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Log.v("KeyDown", "KeyCode=" + keyCode);
+        if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+            flag = true;
+        }
        // return super.onKeyDown(keyCode, event);
         return true;
     }
 
+    @Override
+    public boolean onKeyUp( int keyCode, KeyEvent event ) {
+        Log.v("KeyUp", "KeyCode=" + keyCode);
+        if ((!flag) && (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP)) {
+            Intent intent = new Intent(getApplication(), GotoHomeActivity.class);
+            startActivity(intent);
+        }
+        if ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) ||
+                (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN)){
+            flag = false;
+            Intent intent = new Intent(getApplication(), SOSActivity.class);
+            startActivity(intent);
+        }
+        return true;
+    }
+/*
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
@@ -139,6 +159,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 //        return super.dispatchKeyEvent(event);
         return true;
     }
+*/
 
 /*  ボタン処理.
     public void onClick(View view) {
