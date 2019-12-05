@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,6 +11,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.content.Intent;
@@ -144,6 +147,21 @@ public class MainActivity extends Activity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // オブジェクト取得。
+        ImageView _randomImage = findViewById(R.id.imageView);
+
+        // 画像リスト取得。
+        TypedArray typedArray = getResources().obtainTypedArray(R.array.list_random_image);
+
+        // Arrayの要素数のランダムな値生成。
+        int rand = (int) Math.floor(Math.random() * (typedArray.length()));
+
+        // ランダムな画像を選択。
+        Drawable drawable = typedArray.getDrawable(rand);
+
+        // 選択した画像を表示。
+        _randomImage.setImageDrawable(drawable);
 
         if (DEBUG) {
             // textview

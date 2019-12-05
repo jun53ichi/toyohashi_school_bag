@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="list_random_image">
+        <item>@drawable/cookie</item>
+        <item>@drawable/dora</item>
+        <item>@drawable/neko</item>
+        <item>@drawable/pika</item>
+        <item>@drawable/sumikko</item>
+        <item>@drawable/yadon</item>
+    </array>
+</resources>
