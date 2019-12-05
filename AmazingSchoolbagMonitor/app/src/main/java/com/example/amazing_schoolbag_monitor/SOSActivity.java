@@ -2,9 +2,18 @@ package com.example.amazing_schoolbag_monitor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
@@ -17,6 +26,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.Transport;
 import javax.mail.MessagingException;
+
+import java.io.IOException;
 import java.util.Properties;
 import java.util.Calendar;
 
@@ -49,6 +60,45 @@ public class SOSActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         sendGmail(subject, maintext, from_addr, from_pw, to_addr);
+
+        alarm();
+    }
+
+    private void alarm(){
+//        SharedPreferences getAlarms = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+//        String alarms = getAlarms.getString("title", "Alarm_Buzzer");
+//        Log.d("Alarm", "alarms : " + alarms);
+//        Uri uri = Uri.parse(alarms);
+//        Log.d("Alarm", "uri : " + uri);
+//        playSound(this, uri);
+        playSound(this, Uri.parse("/system/media/audio/alarms/Alarm_Buzzer.ogg"));
+
+        //call mMediaPlayer.stop(); when you want the sound to stop
+    }
+
+    private MediaPlayer mMediaPlayer;
+    private void playSound(Context context, Uri alert) {
+        mMediaPlayer = new MediaPlayer();
+        try {
+            mMediaPlayer.setDataSource(context, alert);
+            final AudioManager audioManager = (AudioManager) context
+                    .getSystemService(Context.AUDIO_SERVICE);
+            if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) != 0) {
+                mMediaPlayer.setLooping(true);
+                mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+                mMediaPlayer.prepare();
+                mMediaPlayer.start();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        mMediaPlayer.stop();
+                    }
+                }, 5000);
+
+            }
+        } catch (IOException e) {
+            System.out.println("OOPS");
+        }
     }
 
     // 画面遷移のためのキーイベント処理
