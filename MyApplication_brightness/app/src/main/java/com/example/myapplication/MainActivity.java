@@ -27,114 +27,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     private float[] currentOrientationValues = { 0.0f, 0.0f, 0.0f };
     private float[] currentAccelerationValues = { 0.0f, 0.0f, 0.0f };
-    private float[] recentlyAccelerationValues[] =
-            {{ 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f },
-            { 0.0f, 0.0f, 0.0f }};
+    private float[][] recentlyAccelerationValues = new float[100][3];
     private int recentlyCount = 0;
     private float avarageAccelerationValuesX = 0;
     private float avarageAccelerationValuesY = 0;
     private float avarageAccelerationValuesZ = 0;
-    private float recentlyAvarageAccelerationValuesX = 0;
-    private float recentlyAvarageAccelerationValuesY = 0;
-    private float recentlyAvarageAccelerationValuesZ = 0;
     private boolean initialFlg = false;
 
     private SensorManager manager;
@@ -256,19 +153,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 
             // 加速度センサー
             case Sensor.TYPE_ACCELEROMETER:
-                // 重力加速度9.8 m/s^2を除去するためにフィルタを使用
-                currentOrientationValues[0] = event.values[0] * 0.1f + currentOrientationValues[0] * (1.0f - 0.1f);
-                currentOrientationValues[1] = event.values[1] * 0.1f + currentOrientationValues[1] * (1.0f - 0.1f);
-                currentOrientationValues[2] = event.values[2] * 0.1f + currentOrientationValues[2] * (1.0f - 0.1f);
-
-                currentAccelerationValues[0] = event.values[0] - currentOrientationValues[0];
-                currentAccelerationValues[1] = event.values[1] - currentOrientationValues[1];
-                currentAccelerationValues[2] = event.values[2] - currentOrientationValues[2];
-
-                String strTmp = "加速度センサー\n"
-                        + " X: " + currentAccelerationValues[0] + "\n"
-                        + " Y: " + currentAccelerationValues[1] + "\n"
-                        + " Z: " + currentAccelerationValues[2];
+                currentAccelerationValues[0] = event.values[0];
+                currentAccelerationValues[1] = event.values[1];
+                currentAccelerationValues[2] = event.values[2];
 
                 // 30 msecごとに収集している加速度データ直近100回分(3 sec)を保持
                 recentlyAccelerationValues[recentlyCount][0] = currentAccelerationValues[0];
@@ -281,42 +168,32 @@ public class MainActivity extends Activity implements SensorEventListener {
                     recentlyCount++;
                 }
 
-                // 直近100回と30回のそれぞれの平均値を算出
+                // 直近100回（3,000 [msec]）の平均値を算出
                 avarageAccelerationValuesX = 0;
                 avarageAccelerationValuesY = 0;
                 avarageAccelerationValuesZ = 0;
-                recentlyAvarageAccelerationValuesX = 0;
-                recentlyAvarageAccelerationValuesY = 0;
-                recentlyAvarageAccelerationValuesZ = 0;
                 for(int i = 0; i < 100; i++) {
                     avarageAccelerationValuesX += recentlyAccelerationValues[i][0];
                     avarageAccelerationValuesY += recentlyAccelerationValues[i][1];
                     avarageAccelerationValuesZ += recentlyAccelerationValues[i][2];
                 }
-                for(int i = 0; i < 30; i++) {
-                    recentlyAvarageAccelerationValuesX += recentlyAccelerationValues[i][0];
-                    recentlyAvarageAccelerationValuesY += recentlyAccelerationValues[i][1];
-                    recentlyAvarageAccelerationValuesZ += recentlyAccelerationValues[i][2];
-                }
                 avarageAccelerationValuesX /= 100;
                 avarageAccelerationValuesY /= 100;
                 avarageAccelerationValuesZ /= 100;
-                recentlyAvarageAccelerationValuesX /= 30;
-                recentlyAvarageAccelerationValuesY /= 30;
-                recentlyAvarageAccelerationValuesZ /= 30;
+                // 加速度情報ログ出力
+                Log.v("currentAccelerationValues[0]","currentAccelerationValues[0]=" + currentAccelerationValues[0]);
+                Log.v("currentAccelerationValues[1]","currentAccelerationValues[1]=" + currentAccelerationValues[1]);
+                Log.v("currentAccelerationValues[2]","currentAccelerationValues[2]=" + currentAccelerationValues[2]);
                 Log.v("avarageAccelerationValuesX","avarageAccelerationValuesX=" + avarageAccelerationValuesX);
                 Log.v("avarageAccelerationValuesY","avarageAccelerationValuesY=" + avarageAccelerationValuesY);
                 Log.v("avarageAccelerationValuesZ","avarageAccelerationValuesZ=" + avarageAccelerationValuesZ);
 
                 // 衝撃判定
-                // X,Y,Z軸いずれかの直近30回の平均値と直近100回の平均値の差が10を超えた時に振動検知したと判定
+                // タブレットが水平の状態で一定時間経過したきに状態遷移
                 if (initialFlg == true
-                && (abs(recentlyAvarageAccelerationValuesX - avarageAccelerationValuesX) > 10
-                || abs(recentlyAvarageAccelerationValuesY - avarageAccelerationValuesY) > 10
-                || abs(recentlyAvarageAccelerationValuesZ - avarageAccelerationValuesZ) > 10)) {
-                    Log.v("recentlyAvarageAccelerationValuesX","recentlyAvarageAccelerationValuesX=" + recentlyAvarageAccelerationValuesX);
-                    Log.v("recentlyAvarageAccelerationValuesY","recentlyAvarageAccelerationValuesY=" + recentlyAvarageAccelerationValuesY);
-                    Log.v("recentlyAvarageAccelerationValuesZ","recentlyAvarageAccelerationValuesZ=" + recentlyAvarageAccelerationValuesZ);
+                && abs(avarageAccelerationValuesX) > 9
+                && abs(avarageAccelerationValuesY) < 3) {
+                    // 状態遷移した瞬間の加速度情報ログ出力
                     Log.v("avarageAccelerationValuesX","avarageAccelerationValuesX=" + avarageAccelerationValuesX);
                     Log.v("avarageAccelerationValuesY","avarageAccelerationValuesY=" + avarageAccelerationValuesY);
                     Log.v("avarageAccelerationValuesZ","avarageAccelerationValuesZ=" + avarageAccelerationValuesZ);
