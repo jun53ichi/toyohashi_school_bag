@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.amazing_schoolbag_monitor;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

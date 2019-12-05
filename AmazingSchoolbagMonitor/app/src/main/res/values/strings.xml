@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">AmazingSchoolbagMonitor</string>
     <string name="main">Main Activity</string>
     <string name="goto_sos">SOS</string>
     <string name="goto_home">GOTO HOME</string>
